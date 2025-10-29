@@ -26,7 +26,7 @@ jobs:
 
       # Thanks for https://github.com/Ilshidur/action-discord/issues/88#issuecomment-1322630197
       - name: Discord notification
-        uses: Ilshidur/action-discord
+        uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
           DISCORD_AVATAR: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
@@ -46,3 +46,5 @@ jobs:
             "timestamp": "${{github.event.head_commit.timestamp}}",
             "footer":{"text": "${{github.event.head_commit.timestamp}}"}
           }    ]'
+        with:
+          args: ''
