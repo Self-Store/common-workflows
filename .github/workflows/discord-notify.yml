@@ -9,10 +9,10 @@ on:
       changed_files:
         required: true
         type: string
+
     secrets:
       DISCORD_WEBHOOK_URL:
         required: true
-        description: "Discord Webhook URL"
 
 jobs:
   notify:
@@ -20,7 +20,7 @@ jobs:
     steps:
       # Thanks for https://github.com/Ilshidur/action-discord/issues/88#issuecomment-1322630197
       - name: Discord notification
-        uses: Ilshidur/action-discord@master
+        uses: Ilshidur/action-discord
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
           DISCORD_AVATAR: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
