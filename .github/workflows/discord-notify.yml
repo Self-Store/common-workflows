@@ -2,6 +2,10 @@ name: Discord Notify
 
 on:
   workflow_call:
+    inputs:
+      job_name:
+        required: true
+        type: string
     secrets:
       DISCORD_WEBHOOK_URL:
         required: true
