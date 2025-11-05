@@ -22,15 +22,7 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v34
         with:
-          separator: "\n"
-
-      - name: Normalize changed files
-        id: normalize-changed-files
-        run: |
-          echo "${{ steps.changed-files.outputs.all_changed_files }}" | tr '%0A' '\n' > changed_files.txt
-          echo "files<<EOF" >> $GITHUB_OUTPUT
-          cat changed_files.txt >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          separator: $'\n'
 
       - uses: benjlevesque/short-sha@v2.1
         id: short-sha
@@ -52,7 +44,7 @@ jobs:
             { "name": "Event", "value": "${{github.event_name}}", "inline": true },
             { "name": "Job", "value": "${{inputs.job_name}}", "inline": true },
             { "name": "Commit Message", "value": "[${{ steps.short-sha.outputs.sha }}](https://github.com/${{github.repository}}/commit/${{github.sha}}) - `${{github.event.head_commit.message}}`" },
-            { "name": "Changed Files", "value": "${{ steps.normalize-changed-files.outputs.files }}" },
+            { "name": "Changed Files", "value": "${{ steps.changed-files.outputs.all_changed_files }}" },
             { "name": "Author", "value": "[${{github.event.head_commit.author.name}}](https://github.com/${{github.actor}})" }
             ],
             "color":1127128,
