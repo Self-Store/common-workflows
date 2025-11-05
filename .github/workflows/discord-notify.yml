@@ -28,7 +28,7 @@ jobs:
         id: format-files
         run: |
           ENCODED_FILES="${{ steps.changed-files.outputs.all_changed_files }}"
-          DECODED_FILES="${ENCODED_FILES//%0A/\\n}"
+          DECODED_FILES="${ENCODED_FILES//,/\\n}"
           echo "file_list=$DECODED_FILES" >> $GITHUB_OUTPUT
 
       - uses: benjlevesque/short-sha@v2.1
