@@ -22,14 +22,14 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v34
         with:
-          separator: "\\n"
+          separator: ","
 
-      - name: Format file list for Discord
-        id: format-files
+      - name: Format changed file list for Discord
+        id: format-changed-files
         run: |
           ENCODED_FILES="${{ steps.changed-files.outputs.all_changed_files }}"
           DECODED_FILES="${ENCODED_FILES//,/\\n}"
-          echo "file_list=$DECODED_FILES" >> $GITHUB_OUTPUT
+          echo "changed_files=$DECODED_FILES" >> $GITHUB_OUTPUT
 
       - uses: benjlevesque/short-sha@v2.1
         id: short-sha
@@ -51,7 +51,7 @@ jobs:
             { "name": "Event", "value": "${{github.event_name}}", "inline": true },
             { "name": "Job", "value": "${{inputs.job_name}}", "inline": true },
             { "name": "Commit Message", "value": "[${{ steps.short-sha.outputs.sha }}](https://github.com/${{github.repository}}/commit/${{github.sha}}) - `${{github.event.head_commit.message}}`" },
-            { "name": "Changed Files", "value": "${{ steps.changed-files.outputs.all_changed_files }}" },
+            { "name": "Changed Files", "value": "${{ steps.format-changed-files.outputs.changed_files }}" },
             { "name": "Author", "value": "[${{github.event.head_commit.author.name}}](https://github.com/${{github.actor}})" }
             ],
             "color":1127128,
