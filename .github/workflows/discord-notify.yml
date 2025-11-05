@@ -22,7 +22,7 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v34
         with:
-          separator: "----------------------\n"
+          separator: "\n"
 
       - uses: benjlevesque/short-sha@v2.1
         id: short-sha
@@ -35,7 +35,7 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
           DISCORD_AVATAR: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
-          DISCORD_EMBEDS: '[    { 
+          DISCORD_EMBEDS: '[    {
             "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
             "url": "https://github.com/${{github.repository}}/commit/${{github.sha}}",
             "fields": [
